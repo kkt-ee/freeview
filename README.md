@@ -129,6 +129,8 @@ mkcert -ecdsa -cert-file ~/.local/share/freeview/certs/localhost.pem \\
 ``` -->
 
 
+**INSTALLATION COMPLETE**
+
 
 ## Launch `freeview` dashboard
 <!-- The above `freeview cert` command creates, the  following command will launch the `freeview` dashboard -->
@@ -141,8 +143,6 @@ mkcert -ecdsa -cert-file ~/.local/share/freeview/certs/localhost.pem \\
 
 **Note**: The viewer should be running in the default URL: `https://localhost:8501`
 
-
-**INSTALLATION COMPLETE**
 
 ---
 

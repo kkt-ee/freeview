@@ -142,8 +142,9 @@ mkcert -ecdsa -cert-file ~/.local/share/freeview/certs/localhost.pem \\
 **Note**: The viewer should be running in the default URL: `https://localhost:8501`
 
 
+**INSTALLATION COMPLETE**
 
-
+---
 
 <br><br><br><br>
 

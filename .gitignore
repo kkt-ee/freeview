@@ -1,3 +1,11 @@
+/.*
+/!.gitignore
+**/.*
+**/__pycache__/
+**/.ipynb_checkpoints/
+
+/.pypirc
+
 # Ignore generated outputs and caches for the freeview package
 output/
 __pycache__/

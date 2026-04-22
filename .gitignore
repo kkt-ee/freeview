@@ -15,6 +15,8 @@ pip-wheel-metadata/
 # Virtualenvs
 venv/
 env/
+freeviewer/
+freeviewer_*/
 
 # Editor / OS files
 .DS_Store
@@ -23,6 +25,9 @@ env/
 
 # Test / cache
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
 
 # Keys / certs (do not commit private keys)
 *.pem
@@ -30,4 +35,5 @@ env/
 
 # Coverage / misc
 .coverage
+*.log
 

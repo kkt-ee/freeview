@@ -1,0 +1,33 @@
+# Ignore generated outputs and caches for the freeview package
+output/
+__pycache__/
+*.pyc
+.venv/
+.env
+certs/
+
+# Packaging and build artifacts
+dist/
+build/
+*.egg-info/
+pip-wheel-metadata/
+
+# Virtualenvs
+venv/
+env/
+
+# Editor / OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Test / cache
+.pytest_cache/
+
+# Keys / certs (do not commit private keys)
+*.pem
+*.key
+
+# Coverage / misc
+.coverage
+

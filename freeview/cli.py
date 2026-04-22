@@ -1,3 +1,7 @@
+# Copyright (C) 2026 Kishore Kumar Tarafdar
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See LICENSE for full license text.
+
 """CLI entrypoints for freeview minimal tool."""
 import argparse
 import os
@@ -8,6 +12,11 @@ from pathlib import Path
 
 
 def _script_path():
+    """Return the path to the bundled Streamlit app.
+
+    Returns:
+        pathlib.Path: Absolute path to `streamlit_app.py` inside the package.
+    """
     # path to bundled streamlit app
     return Path(__file__).resolve().parent / "streamlit_app.py"
 
@@ -25,11 +34,24 @@ def _cert_dir() -> Path:
 
 
 def _confirm(prompt: str) -> bool:
+    """Prompt the user for a yes/no confirmation.
+
+    Args:
+        prompt (str): Prompt message displayed to the user.
+
+    Returns:
+        bool: True if the user answers 'y' or 'yes' (case-insensitive), else False.
+    """
     reply = input(f"{prompt} [y/N]: ").strip().lower()
     return reply in {"y", "yes"}
 
 
 def _mkcert_install_hint() -> str:
+    """Return a platform-specific installation hint for `mkcert`.
+
+    Returns:
+        str: A short instruction string explaining how to install `mkcert` on the current OS.
+    """
     if os.name == "nt":
         return "Install mkcert in Administrator PowerShell: choco install mkcert -y"
     if sys.platform == "darwin":

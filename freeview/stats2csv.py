@@ -1,3 +1,7 @@
+# Copyright (C) 2026 Kishore Kumar Tarafdar
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See LICENSE for full license text.
+
 """High-level orchestration to convert a stats directory into CSV files."""
 from pathlib import Path
 import logging
@@ -10,6 +14,15 @@ logger = logging.getLogger("freeview")
 
 
 def convert_stats_dir(stats_dir: str, out_dir: str):
+    """Convert a FreeSurfer stats directory into CSV files.
+
+    Args:
+        stats_dir (str | pathlib.Path): Path to the stats directory to read.
+        out_dir (str | pathlib.Path): Directory where CSV outputs will be written.
+
+    Returns:
+        str: Derived patient token used and inserted into outputs (e.g. patient id).
+    """
     stats_dir = Path(stats_dir)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

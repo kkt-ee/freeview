@@ -1,3 +1,7 @@
+# Copyright (C) 2026 Kishore Kumar Tarafdar
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See LICENSE for full license text.
+
 """Parsers for common FreeSurfer stats files: `aseg`, `wmparc`, `aparc` (lh/rh)."""
 from pathlib import Path
 import re
@@ -8,6 +12,15 @@ logger = logging.getLogger("freeview")
 
 
 def _read_table_lines(path):
+    """Read a stats file and return non-empty non-comment lines.
+
+    Args:
+        path (str | pathlib.Path): Path to the stats file.
+
+    Returns:
+        list[str]: Lines from the file with trailing newlines removed, excluding
+        empty lines and lines starting with '#'.
+    """
     with open(path, "r") as f:
         lines = [l.rstrip("\n") for l in f]
     # skip header comments
@@ -55,6 +68,14 @@ def parse_aseg(path):
 
 
 def parse_wmparc(path):
+    """Parse a `wmparc.stats` file (same format as `aseg.stats`).
+
+    Args:
+        path (str | pathlib.Path): Path to `wmparc.stats`.
+
+    Returns:
+        pandas.DataFrame: Parsed table with columns matching `parse_aseg`.
+    """
     # same format as aseg
     return parse_aseg(path)
 

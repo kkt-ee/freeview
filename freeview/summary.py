@@ -1,3 +1,7 @@
+# Copyright (C) 2026 Kishore Kumar Tarafdar
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See LICENSE for full license text.
+
 """Extract global summary measures from FreeSurfer stats headers."""
 from pathlib import Path
 import re
@@ -5,6 +9,16 @@ import pandas as pd
 
 
 def _parse_measures_from_file(path: Path):
+    """Parse measure lines and subject name from a `.stats` file header.
+
+    Args:
+        path (pathlib.Path): Path to a single `.stats` file to inspect.
+
+    Returns:
+        tuple[str|None, dict]: A tuple of (subject, measures) where `subject` is
+        the parsed subject name if present, else None, and `measures` is a dict
+        mapping measure keys to numeric values.
+    """
     measures = {}
     subject = None
     with open(path, "r") as f:

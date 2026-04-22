@@ -1,3 +1,7 @@
+# Copyright (C) 2026 Kishore Kumar Tarafdar
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See LICENSE for full license text.
+
 """Minimal Streamlit app to inspect FreeSurfer stats CSVs.
 
 Usage:
@@ -23,6 +27,15 @@ from freeview import stats2csv
 
 
 def load_df(path):
+    """Load a CSV file into a pandas DataFrame.
+
+    Args:
+        path (str | Path): Path to the CSV file.
+
+    Returns:
+        pandas.DataFrame: DataFrame loaded from `path`, or an empty DataFrame if
+        the file does not exist or cannot be read.
+    """
     p = Path(path)
     if not p.exists():
         return pd.DataFrame()
@@ -30,6 +43,20 @@ def load_df(path):
 
 
 def get_metric(df, candidates):
+    """Return the first matching metric value from a DataFrame.
+
+    The function checks exact column name matches first, then performs a
+    case-insensitive substring match over column names.
+
+    Args:
+        df (pandas.DataFrame): DataFrame whose first row is examined.
+        candidates (Iterable[str]): Iterable of candidate column names or
+            substrings to search for.
+
+    Returns:
+        object | None: The matched cell value from the first row, or ``None``
+        if no candidate was found or if ``df`` is empty.
+    """
     if df.empty:
         return None
     row = df.iloc[0]
@@ -45,9 +72,14 @@ def get_metric(df, candidates):
 
 
 def _find_stats_dir(root: Path) -> Path | None:
-    """Search extracted archive for a FreeSurfer `stats` directory or a file `aseg.stats`.
+    """Search a directory tree for a FreeSurfer `stats` directory.
 
-    Returns the Path to the stats directory or None if not found.
+    Args:
+        root (Path): Directory to search recursively.
+
+    Returns:
+        Path | None: Path to the `stats` directory (or the parent directory
+        containing `aseg.stats`) if found, otherwise ``None``.
     """
     # look for a directory named 'stats'
     for p in root.rglob("stats"):
@@ -60,9 +92,15 @@ def _find_stats_dir(root: Path) -> Path | None:
 
 
 def _safe_extract_zip(zip_path: Path, extract_dir: Path):
-    """Safely extract a zip file into extract_dir, preventing path traversal.
+    """Safely extract a ZIP file into ``extract_dir`` preventing path traversal.
 
-    Raises RuntimeError if a zip member would extract outside extract_dir.
+    Args:
+        zip_path (Path): Path to the ZIP archive.
+        extract_dir (Path): Destination directory where files will be extracted.
+
+    Raises:
+        RuntimeError: If a zip member would extract outside ``extract_dir`` or
+            contains an invalid path.
     """
     extract_dir = Path(extract_dir)
     with zipfile.ZipFile(zip_path, "r") as z:
@@ -84,7 +122,16 @@ def _safe_extract_zip(zip_path: Path, extract_dir: Path):
 
 
 def _normalize_uploaded_parts(upload_name: str) -> list[str]:
-    """Normalize an uploaded file path into safe path components."""
+    """Normalize an uploaded file path into safe path components.
+
+    Args:
+        upload_name (str): The original uploaded name (may contain backslashes
+            or drive-letter prefixes depending on browser/OS).
+
+    Returns:
+        list[str]: A list of path components suitable for reconstructing a
+        safe local path (parent traversal components removed).
+    """
     raw = str(upload_name).replace("\\", "/")
     parts = [p for p in raw.split("/") if p and p not in {".", ".."}]
     if parts and parts[0].endswith(":"):
@@ -93,7 +140,16 @@ def _normalize_uploaded_parts(upload_name: str) -> list[str]:
 
 
 def _validate_stats_folder_upload(uploaded_files) -> tuple[bool, str]:
-    """Validate directory upload to only allow a folder named `stats` with `.stats` files."""
+    """Validate a folder upload contains only `.stats` files under `stats`.
+
+    Args:
+        uploaded_files (Iterable[UploadedFile]): Files reported by the
+            Streamlit uploader (each should expose a ``name`` attribute).
+
+    Returns:
+        tuple[bool, str]: ``(True, "")`` when valid; otherwise ``(False, msg)``
+        where ``msg`` explains the validation error.
+    """
     if not uploaded_files:
         return False, "Please upload a folder named 'stats'."
 
@@ -119,10 +175,15 @@ def _validate_stats_folder_upload(uploaded_files) -> tuple[bool, str]:
 
 
 def _select_local_folder() -> str | None:
-    """Open a native folder selection dialog and return the selected path.
+    """Return a local folder path if available from the environment.
 
-    This runs on the Streamlit server process, so only works when running locally.
-    Returns None if selection failed or was cancelled.
+    Notes:
+        Streamlit doesn't provide a cross-platform native folder picker in the
+        browser UI. This helper is a placeholder that can be extended for
+        platform-specific solutions.
+
+    Returns:
+        str | None: Path to the selected folder, or ``None`` if not available.
     """
     # No native folder-picker here to keep the app cross-platform.
     # Use the `Local path` input or the uploader (select files or zip).

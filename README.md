@@ -6,7 +6,10 @@
 
 <!-- Prerequisite: Python 3.10 or newer (recommend Python 3.12). -->
 
-## Quick install (PyPI recommended)
+
+
+
+## Quick install (recommended)
 
 Use a Python 3.10+ interpreter when creating the virtual environment. 
 
@@ -185,3 +188,10 @@ When running Streamlit directly and wanting HTTPS you must pass `--server.sslCer
 ```bash
 freeview stats2csv --stats-dir /path/to/A_T1/stats --out-dir ./output
 ```
+
+
+---
+
+Copyright © 2026 Kishore Kumar Tarafdar
+
+Released under the GNU General Public License v3.0 — see [LICENSE](LICENSE)

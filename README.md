@@ -1,8 +1,8 @@
 # freeview: Interactive FreeSurfer Stats Dashboard
 
-[![PyPI Version](https://img.shields.io/pypi/v/freeview?label=PyPI&color=gold)](https://pypi.org/project/freeview/) 
-[![PyPI Version](https://img.shields.io/pypi/pyversions/freeview)](https://pypi.org/project/freeview/)
-[![MIT](https://img.shields.io/badge/license-GPLv3-deepgreen.svg?style=flat)](https://github.com/kkt-ee/freeview/LICENSE)
+[![PyPI Version](https://img.shields.io/pypi/v/freeview?label=PyPI&color=gold)](https://pypi.org/project/freeview/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/freeview)](https://pypi.org/project/freeview/)
+[![License](https://img.shields.io/badge/license-GPLv3-deepgreen.svg?style=flat)](https://github.com/kkt-ee/freeview/LICENSE)
 
 <!-- Prerequisite: Python 3.10 or newer (recommend Python 3.12). -->
 
@@ -11,10 +11,10 @@
 
 ## Quick install (recommended)
 
-Use a Python 3.10+ interpreter when creating the virtual environment. 
+Use a Python 3.10+ interpreter when creating the virtual environment.
 
 
-**Install freeview**:
+**Install `freeview`**:
 
 - Linux / macOS:
 
@@ -63,7 +63,7 @@ Windows PowerShell:
 
 ## Setup local certificates (important)
 
-Certificates are required for the recommended `https only` local setup
+Certificates are required for the recommended HTTPS-only local setup.
 
 
 
@@ -108,7 +108,7 @@ choco install mkcert -y
 # mkcert -install
 ```
 
-*For other linux distros see mkcert's official guidelines*: Use your distro package or download the binary from https://github.com/FiloSottile/mkcert and run `mkcert -install`.
+*For other Linux distros, see mkcert's official guidelines*: use your distro package or download the binary from https://github.com/FiloSottile/mkcert and run `mkcert -install`.
 
 After installing `mkcert`, create the local certificates
 
@@ -174,7 +174,7 @@ Build a wheel in the project root (requires the `build` package):
 Replace `./freeviewer/bin/python` with the interpreter you used to create the venv (or `python3.12` if you are not in a venv yet).
 
 
-## Alternate launch method with Streamlit directly (advanced / debugging):
+## Alternate launch method with Streamlit directly (advanced / debugging)
 
 ```bash
 python -m streamlit run path/to/freeview/streamlit_app.py -- \\
@@ -188,6 +188,22 @@ When running Streamlit directly and wanting HTTPS you must pass `--server.sslCer
 
 ```bash
 freeview stats2csv --stats-dir /path/to/A_T1/stats --out-dir ./output
+```
+
+## Citation
+
+This software is released for broad research, educational, and engineering use. If this package helps your work, please cite the following paper:
+
+```bibtex
+@misc{tarafdar2026interpretablefrugallearningsystems,
+      title={Interpretable and Frugal Learning Systems Employing Multiresolution Pyramids and Volterra Kernels},
+      author={Kishore Kumar Tarafdar},
+      year={2026},
+      eprint={2606.15011},
+      archivePrefix={arXiv},
+      primaryClass={eess.SP},
+      url={https://arxiv.org/abs/2606.15011},
+}
 ```
 
 
